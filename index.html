@@ -48,7 +48,33 @@
         .dashboard-button:hover {
             background-color: #4f46e5;
         }
-        #bankDataContainer, #freeFireContainer, #freeFireFrameContainer {
+        .dashboard-button.flow-tv {
+            background-color: #ec4899;
+        }
+        .dashboard-button.flow-tv:hover {
+            background-color: #db2777;
+        }
+        .dashboard-button.disney-plus {
+            background-color: #113ccf;
+        }
+        .dashboard-button.disney-plus:hover {
+            background-color: #0d2e9e;
+        }
+        .dashboard-button.netflix-vip {
+            background-color: #e50914;
+        }
+        .dashboard-button.netflix-vip:hover {
+            background-color: #b20710;
+        }
+        .dashboard-button.netflix-option {
+            background-color: #221f1f;
+            min-width: 150px;
+            padding: 12px 20px;
+        }
+        .dashboard-button.netflix-option:hover {
+            background-color: #000000;
+        }
+        #bankDataContainer, #freeFireContainer, #freeFireFrameContainer, #netflixOptionsContainer {
             margin-top: 20px;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
@@ -239,6 +265,14 @@
             align-items: center;
             margin-bottom: 15px;
         }
+        /* Estilos para las opciones de Netflix */
+        .netflix-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
@@ -247,9 +281,9 @@
         <div class="dashboard-buttons">
             <button class="dashboard-button" id="showBankData">Datos Bancarios</button>
             <button class="dashboard-button" id="showFreeFireCalc">CÁLCULO DE COMPRA PINES FREE FIRE</button>
-            <button class="dashboard-button">Botón 3</button>
-            <button class="dashboard-button">Botón 4</button>
-            <button class="dashboard-button">Botón 5</button>
+            <button class="dashboard-button flow-tv" id="flowTvButton">FLUJO TV</button>
+            <button class="dashboard-button disney-plus" id="disneyPlusButton">DISNEY PLUS</button>
+            <button class="dashboard-button netflix-vip" id="netflixVipButton">NETFLIX VIP</button>
         </div>
 
         <div id="bankDataContainer" class="hidden">
@@ -341,6 +375,16 @@
             <iframe src="https://vendeygana2.github.io/comprafree/" class="free-fire-frame" allowfullscreen></iframe>
         </div>
 
+        <div id="netflixOptionsContainer" class="hidden">
+            <button class="close-btn" id="closeNetflixOptions">X</button>
+            <h2>Opciones de Netflix VIP</h2>
+            <div class="netflix-options">
+                <button class="dashboard-button netflix-option" id="netflixVip1">NETFLIX VIP 1</button>
+                <button class="dashboard-button netflix-option" id="netflixVip2">NETFLIX VIP 2</button>
+                <button class="dashboard-button netflix-option" id="netflixVip3">NETFLIX VIP 3</button>
+            </div>
+        </div>
+
         <div class="notification" id="notification">
             <span class="notification-icon">✓</span>
             <span id="notification-text"></span>
@@ -352,17 +396,26 @@
         const bankDataContainer = document.getElementById('bankDataContainer');
         const freeFireContainer = document.getElementById('freeFireContainer');
         const freeFireFrameContainer = document.getElementById('freeFireFrameContainer');
+        const netflixOptionsContainer = document.getElementById('netflixOptionsContainer');
         const showBankDataButton = document.getElementById('showBankData');
         const showFreeFireCalcButton = document.getElementById('showFreeFireCalc');
+        const flowTvButton = document.getElementById('flowTvButton');
+        const disneyPlusButton = document.getElementById('disneyPlusButton');
+        const netflixVipButton = document.getElementById('netflixVipButton');
         const closeBankDataButton = document.getElementById('closeBankData');
         const closeFreeFireCalcButton = document.getElementById('closeFreeFireCalc');
         const closeFreeFireFrameButton = document.getElementById('closeFreeFireFrame');
+        const closeNetflixOptionsButton = document.getElementById('closeNetflixOptions');
+        const netflixVip1Button = document.getElementById('netflixVip1');
+        const netflixVip2Button = document.getElementById('netflixVip2');
+        const netflixVip3Button = document.getElementById('netflixVip3');
 
         // Mostrar/ocultar contenedores
         showBankDataButton.addEventListener('click', function() {
             bankDataContainer.classList.remove('hidden');
             freeFireContainer.classList.add('hidden');
             freeFireFrameContainer.classList.add('hidden');
+            netflixOptionsContainer.classList.add('hidden');
         });
 
         showFreeFireCalcButton.addEventListener('click', function() {
@@ -370,6 +423,43 @@
             freeFireFrameContainer.classList.remove('hidden');
             bankDataContainer.classList.add('hidden');
             freeFireContainer.classList.add('hidden');
+            netflixOptionsContainer.classList.add('hidden');
+        });
+
+        // Botón FLUJO TV - Redirige a WhatsApp con mensaje predeterminado
+        flowTvButton.addEventListener('click', function() {
+            const mensaje = encodeURIComponent("Amigo saludos por favor para una cuenta FLUJO TV con los siguientes datos:");
+            window.open(`https://wa.me/584161776344?text=${mensaje}`, '_blank');
+        });
+
+        // Botón DISNEY PLUS - Redirige a WhatsApp con mensaje predeterminado
+        disneyPlusButton.addEventListener('click', function() {
+            const mensaje = encodeURIComponent("Amigo saludos por favor para una cuenta DISNEY PLUS con los siguientes datos:");
+            window.open(`https://wa.me/584245004549?text=${mensaje}`, '_blank');
+        });
+
+        // Botón NETFLIX VIP - Muestra las opciones de Netflix
+        netflixVipButton.addEventListener('click', function() {
+            netflixOptionsContainer.classList.remove('hidden');
+            bankDataContainer.classList.add('hidden');
+            freeFireContainer.classList.add('hidden');
+            freeFireFrameContainer.classList.add('hidden');
+        });
+
+        // Botones de opciones de Netflix (puedes personalizar la acción de cada uno)
+        netflixVip1Button.addEventListener('click', function() {
+            const mensaje = encodeURIComponent("Amigo saludos por favor para una cuenta NETFLIX VIP 1 con los siguientes datos:");
+            window.open(`https://wa.me/584245004549?text=${mensaje}`, '_blank');
+        });
+
+        netflixVip2Button.addEventListener('click', function() {
+            const mensaje = encodeURIComponent("Amigo saludos por favor para una cuenta NETFLIX VIP 2 con los siguientes datos:");
+            window.open(`https://wa.me/584245004549?text=${mensaje}`, '_blank');
+        });
+
+        netflixVip3Button.addEventListener('click', function() {
+            const mensaje = encodeURIComponent("Amigo saludos por favor para una cuenta NETFLIX VIP 3 con los siguientes datos:");
+            window.open(`https://wa.me/584245004549?text=${mensaje}`, '_blank');
         });
 
         closeBankDataButton.addEventListener('click', function() {
@@ -382,6 +472,10 @@
 
         closeFreeFireFrameButton.addEventListener('click', function() {
             freeFireFrameContainer.classList.add('hidden');
+        });
+
+        closeNetflixOptionsButton.addEventListener('click', function() {
+            netflixOptionsContainer.classList.add('hidden');
         });
 
         // Funcionalidad para copiar datos bancarios
